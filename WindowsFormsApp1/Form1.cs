@@ -16,8 +16,10 @@ namespace WindowsFormsApp1
 
         public Form1()
         {
+
             InitializeComponent();
             GridFill();
+            ComboFill();
         }
 
         public void GridFill()
@@ -65,6 +67,52 @@ namespace WindowsFormsApp1
 
         }
 
+        public void ComboFill()
+        {
+           // List<Groups> GroupList = new List<Groups>();
+
+            SqlConnection conn = new SqlConnection(connection);
+           
+               
+                string query = @"select ID, Name from Groups";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                
+            try
+            {
+
+                GroupsList.Items.Clear();
+                conn.Open();
+                SqlDataReader Reader = cmd.ExecuteReader();
+
+                while (Reader.Read())
+                {
+                    Groups groups = new Groups();
+                    groups.Name = Reader["Name"].ToString();
+                  //  groups.ID = Convert.ToInt32(Reader["ID"]);
+                  //  GroupList.Add(groups);
+                    GroupsList.Items.Add(groups.Name);
+                   // GroupsList.Items.Add(groups.ID);
+
+
+
+
+                }
+                conn.Close();
+                
+               
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
+
         public bool IsEmptyString(string name, string surname)
         {
             var IsValid = false;
@@ -76,19 +124,61 @@ namespace WindowsFormsApp1
 
         }
 
-        public void AddUser(string Name, string surname, DateTime birthdate)
+        public void AddUser(string Name, string Surname, string Group, DateTime Birthdate)
         {
 
             SqlConnection conn = new SqlConnection(connection);
-            string query = "INSERT INTO [Users](Name, Surname, Birthdate, CreateDate)" + " values (@name, @surname, @birthdate, @createDate)";
-            using (SqlCommand cmd = new SqlCommand(query, conn))
+            try
             {
-                cmd.Parameters.Add("@name", SqlDbType.NVarChar, 50).Value = Name;
-                cmd.Parameters.Add("@surname", SqlDbType.NVarChar, 50).Value = surname;
-                cmd.Parameters.Add("@birthdate", SqlDbType.Date).Value = birthdate;
-                cmd.Parameters.Add("@createDate", SqlDbType.DateTime).Value = DateTime.Now;
                 conn.Open();
-                cmd.ExecuteNonQuery();
+                string query = "INSERT INTO [Users](Name, Surname, Birthdate, CreateDate, GroupID)" + " values (@name, @surname, @birthdate, @createDate)";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.Add("@name", SqlDbType.NVarChar, 50).Value = Name;
+                    cmd.Parameters.Add("@surname", SqlDbType.NVarChar, 50).Value = Surname;
+                    cmd.Parameters.Add("@birthdate", SqlDbType.Date).Value = Birthdate;
+                    cmd.Parameters.Add("@createDate", SqlDbType.DateTime).Value = DateTime.Now;
+                   
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+
+        public void AddGroup(string GroupName)
+        {
+            SqlConnection conn = new SqlConnection(connection);
+            try
+            {
+                conn.Open();
+                string query = "insert into Groups (Name) values (@groupName)";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.Add("@groupName", SqlDbType.NVarChar, 50).Value = GroupName;
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+               // comboBox1.Items.Add(Group.Name);
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
                 conn.Close();
             }
         }
@@ -98,30 +188,50 @@ namespace WindowsFormsApp1
         {
 
             SqlConnection conn = new SqlConnection(connection);
-            string query = @"update [User].[dbo].[Users]
-                             set ([Name], [Surname],  [Birthdate])  values(@name, @surname, @birthdate)
-                             where
-                                    [ID] = " + id + " ";
-            using (SqlCommand cmd = new SqlCommand(query, conn))
+            try
             {
-                cmd.Parameters.Add("@name", SqlDbType.NVarChar, 50).Value = Name;
-                cmd.Parameters.Add("@surname", SqlDbType.NVarChar, 50).Value = surname;
-                cmd.Parameters.Add("@birthdate", SqlDbType.Date).Value = birthdate;
                 conn.Open();
-                cmd.ExecuteNonQuery();
+                string query = @"UPDATE Users SET
+                              Name = @name,
+                              Surname = @surname,
+                              Birthdate = @birthdate
+                              where ID = " + id + " ";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.Add("@name", SqlDbType.NVarChar, 50).Value = Name;
+                    cmd.Parameters.Add("@surname", SqlDbType.NVarChar, 50).Value = surname;
+                    cmd.Parameters.Add("@birthdate", SqlDbType.Date).Value = birthdate;
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+
+                }
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
                 conn.Close();
             }
+
+
         }
+
 
         private void BtnAddUser_Click(object sender, EventArgs e)
         {
 
             string name = UserName.Text;
             string surname = UserLastName.Text;
+            string group = GroupsList
+        
             DateTime birthdate = DtBirthdate.Value;
+            
             if (IsEmptyString(name, surname))
             {
-                AddUser(name, surname, birthdate);
+                AddUser(name, surname, group, birthdate);
                 GridFill();
             }
             else
@@ -134,12 +244,12 @@ namespace WindowsFormsApp1
 
         private void UsersGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-        
+
             var item = e.RowIndex;
             DataGridViewRow selectedRow = UsersGridView.Rows[item];
             int userId = Convert.ToInt32(selectedRow.Cells[0].Value);
             UserId = userId;
-            MessageBox.Show(userId.ToString());
+            //  MessageBox.Show(userId.ToString());
             SqlConnection sqlConnection = new SqlConnection(connection);
             sqlConnection.Open();
             string query = @"SELECT
@@ -148,7 +258,7 @@ namespace WindowsFormsApp1
                               ,[Birthdate]
                               FROM[User].[dbo].[Users]
                               where
-                               [ID] = "+userId+" ";
+                               [ID] = " + userId + " ";
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
 
             SqlDataReader reader = cmd.ExecuteReader();
@@ -160,21 +270,44 @@ namespace WindowsFormsApp1
             }
             sqlConnection.Close();
 
-           
 
-    }
+
+        }
 
         private void BtnUpdateUser_Click(object sender, EventArgs e)
         {
-           
+
             string name = UserName.Text;
             string surname = UserLastName.Text;
             DateTime birthdate = DtBirthdate.Value;
-            UpdateUser(UserId, name, surname, birthdate);
-           
+            if (IsEmptyString(name, surname))
+            {
+                UpdateUser(UserId, name, surname, birthdate);
+                GridFill();
+
+            }
+            else
+            {
+                MessageBox.Show("sheavset carieli velebi");
+            }
+
+
         }
 
-        
+        private void BtnAddGroup_Click(object sender, EventArgs e)
+        {
+            string groupName = Group.Text;
+            if (!string.IsNullOrWhiteSpace(groupName))
+            {
+           AddGroup(groupName);
+               ComboFill();
+                Group.Clear();
+            }
+            else
+            {
+                MessageBox.Show("sheavset carieli velebi");
+            }
+        }
     }
 
     public class User
@@ -186,4 +319,11 @@ namespace WindowsFormsApp1
         public DateTime CreateDate { get; set; }
 
     }
+}
+
+    public class Groups
+    {
+    public int ID { get; set; }
+    public string Name { get; set; }
+
 }
