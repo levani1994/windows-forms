@@ -69,37 +69,36 @@ namespace WindowsFormsApp1
 
         public void ComboFill()
         {
-           // List<Groups> GroupList = new List<Groups>();
+            // List<Groups> GroupList = new List<Groups>();
 
             SqlConnection conn = new SqlConnection(connection);
-           
-               
-                string query = @"select ID, Name from Groups";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                
+
+
+            string query = @"select ID, Name from Groups";
+            SqlCommand cmd = new SqlCommand(query, conn);
+
             try
             {
 
                 GroupsList.Items.Clear();
                 conn.Open();
                 SqlDataReader Reader = cmd.ExecuteReader();
-
                 while (Reader.Read())
                 {
                     Groups groups = new Groups();
                     groups.Name = Reader["Name"].ToString();
-                  //  groups.ID = Convert.ToInt32(Reader["ID"]);
-                  //  GroupList.Add(groups);
-                    GroupsList.Items.Add(groups.Name);
-                   // GroupsList.Items.Add(groups.ID);
+                    groups.ID = Convert.ToInt32(Reader["ID"]);
+                    GroupsList.Items.Add(new KeyValuePair<int, string>(groups.ID, groups.Name));
+                    //  GroupList.Add(groups);
+
 
 
 
 
                 }
                 conn.Close();
-                
-               
+
+
             }
             catch (Exception e)
             {
@@ -138,7 +137,7 @@ namespace WindowsFormsApp1
                     cmd.Parameters.Add("@surname", SqlDbType.NVarChar, 50).Value = Surname;
                     cmd.Parameters.Add("@birthdate", SqlDbType.Date).Value = Birthdate;
                     cmd.Parameters.Add("@createDate", SqlDbType.DateTime).Value = DateTime.Now;
-                   
+
                     cmd.ExecuteNonQuery();
                     conn.Close();
                 }
@@ -169,7 +168,7 @@ namespace WindowsFormsApp1
                     cmd.ExecuteNonQuery();
                     conn.Close();
                 }
-               // comboBox1.Items.Add(Group.Name);
+                // comboBox1.Items.Add(Group.Name);
 
             }
             catch (Exception e)
@@ -225,19 +224,20 @@ namespace WindowsFormsApp1
 
             string name = UserName.Text;
             string surname = UserLastName.Text;
-            string group = GroupsList
-        
-            DateTime birthdate = DtBirthdate.Value;
-            
-            if (IsEmptyString(name, surname))
-            {
-                AddUser(name, surname, group, birthdate);
-                GridFill();
-            }
-            else
-            {
-                MessageBox.Show("sheavset carieli velebi");
-            }
+            //string group = GroupsList
+
+
+            //DateTime birthdate = DtBirthdate.Value;
+
+            //if (IsEmptyString(name, surname))
+            //{
+            //    AddUser(name, surname, group, birthdate);
+            //    GridFill();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("sheavset carieli velebi");
+            //}
 
 
         }
@@ -299,8 +299,8 @@ namespace WindowsFormsApp1
             string groupName = Group.Text;
             if (!string.IsNullOrWhiteSpace(groupName))
             {
-           AddGroup(groupName);
-               ComboFill();
+                AddGroup(groupName);
+                ComboFill();
                 Group.Clear();
             }
             else
@@ -321,8 +321,8 @@ namespace WindowsFormsApp1
     }
 }
 
-    public class Groups
-    {
+public class Groups
+{
     public int ID { get; set; }
     public string Name { get; set; }
 
