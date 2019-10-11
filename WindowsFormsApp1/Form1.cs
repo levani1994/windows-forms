@@ -70,7 +70,7 @@ namespace WindowsFormsApp1
         public void ComboFill()
         {
             // List<Groups> GroupList = new List<Groups>();
-
+            ComboBox combo = new ComboBox();
             SqlConnection conn = new SqlConnection(connection);
 
 
@@ -85,19 +85,22 @@ namespace WindowsFormsApp1
                 SqlDataReader Reader = cmd.ExecuteReader();
                 while (Reader.Read())
                 {
+                    
                     Groups groups = new Groups();
                     groups.Name = Reader["Name"].ToString();
                     groups.ID = Convert.ToInt32(Reader["ID"]);
-                    GroupsList.Items.Add(new KeyValuePair<int, string>(groups.ID, groups.Name));
-                    //  GroupList.Add(groups);
+                  //  GroupsList.Items.Add(new KeyValuePair<int, string>(groups.ID, groups.Name));
+                      GroupList.Add(groups);
+                    //GroupsList.DataSource = groups;
+                    //GroupsList.DisplayMember = groups.Name;
+                    //MessageBox.Show(GroupsList.ValueMember = groups.ID.ToString());
 
-
-
+                    combo.Items.Add(new Groups(1,"frfr"));
 
 
                 }
                 conn.Close();
-
+                Gr
 
             }
             catch (Exception e)
