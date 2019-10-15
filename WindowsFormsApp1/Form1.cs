@@ -231,8 +231,8 @@ namespace WindowsFormsApp1
         private void BtnAddUser_Click(object sender, EventArgs e)
         {
 
-            string Name = UserName.Text;
-            string Surname = UserLastName.Text;
+            string Name = TxbUserName.Text;
+            string Surname = TxbUserLastName.Text;
             int GroupId = ((KeyValuePair<int, string>)ComboGroupsList.SelectedItem).Key;
             DateTime Birthdate = DtBirthdate.Value;
 
@@ -274,8 +274,8 @@ namespace WindowsFormsApp1
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    UserName.Text = reader["Name"].ToString();
-                    UserLastName.Text = reader["Surname"].ToString();
+                    TxbUserName.Text = reader["Name"].ToString();
+                    TxbUserLastName.Text = reader["Surname"].ToString();
                     DtBirthdate.Value = Convert.ToDateTime(reader["Birthdate"]);
                     ComboGroupsList.SelectedItem = ComboSource.Find(Item => Item.Key == Convert.ToInt32(reader["GroupID"]));
                 }
@@ -301,17 +301,17 @@ namespace WindowsFormsApp1
         private void BtnUpdateUser_Click(object sender, EventArgs e)
         {
 
-            string name = UserName.Text;
-            string surname = UserLastName.Text;
+            string name = TxbUserName.Text;
+            string surname = TxbUserLastName.Text;
             DateTime birthdate = DtBirthdate.Value;
             int GroupId = ((KeyValuePair<int, string>)ComboGroupsList.SelectedItem).Key;
             if (VlidateUserViewModel(name: name, surname: surname))
             {
                 UpdateUser(UserId, name, surname, birthdate, GroupId);
-                UserName.Clear();
-                UserLastName.Clear();
+                TxbUserName.Clear();
+                TxbUserLastName.Clear();
                 DtBirthdate.ResetText();
-                Group.Clear();
+                TxbGroup.Clear();
                 GridFill();
             }
             else
@@ -326,7 +326,7 @@ namespace WindowsFormsApp1
 
         private void BtnAddGroup_Click(object sender, EventArgs e)
         {
-            string groupName = Group.Text;
+            string groupName = TxbGroup.Text;
             if (string.IsNullOrWhiteSpace(groupName))
             {
 
@@ -337,11 +337,11 @@ namespace WindowsFormsApp1
 
                 AddGroup(GroupName: groupName);
                 ComboFill();
-                Group.Clear();
+                TxbGroup.Clear();
             }
         }
 
-
+        
     }
 
     public class User

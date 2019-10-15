@@ -30,8 +30,8 @@
         {
             this.Number1 = new System.Windows.Forms.Label();
             this.Number2 = new System.Windows.Forms.Label();
-            this.UserName = new System.Windows.Forms.TextBox();
-            this.UserLastName = new System.Windows.Forms.TextBox();
+            this.TxbUserName = new System.Windows.Forms.TextBox();
+            this.TxbUserLastName = new System.Windows.Forms.TextBox();
             this.BtnAddUser = new System.Windows.Forms.Button();
             this.LblResult = new System.Windows.Forms.Label();
             this.UsersGridView = new System.Windows.Forms.DataGridView();
@@ -41,7 +41,7 @@
             this.BtnUpdateUser = new System.Windows.Forms.Button();
             this.ComboGroupsList = new System.Windows.Forms.ComboBox();
             this.BtnAddGroup = new System.Windows.Forms.Button();
-            this.Group = new System.Windows.Forms.TextBox();
+            this.TxbGroup = new System.Windows.Forms.TextBox();
             this.LblAddGRoup = new System.Windows.Forms.Label();
             this.lblGroup = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.UsersGridView)).BeginInit();
@@ -65,19 +65,19 @@
             this.Number2.TabIndex = 1;
             this.Number2.Text = "გვარი";
             // 
-            // UserName
+            // TxbUserName
             // 
-            this.UserName.Location = new System.Drawing.Point(145, 37);
-            this.UserName.Name = "UserName";
-            this.UserName.Size = new System.Drawing.Size(137, 20);
-            this.UserName.TabIndex = 7;
+            this.TxbUserName.Location = new System.Drawing.Point(145, 37);
+            this.TxbUserName.Name = "TxbUserName";
+            this.TxbUserName.Size = new System.Drawing.Size(137, 20);
+            this.TxbUserName.TabIndex = 7;
             // 
-            // UserLastName
+            // TxbUserLastName
             // 
-            this.UserLastName.Location = new System.Drawing.Point(145, 69);
-            this.UserLastName.Name = "UserLastName";
-            this.UserLastName.Size = new System.Drawing.Size(137, 20);
-            this.UserLastName.TabIndex = 8;
+            this.TxbUserLastName.Location = new System.Drawing.Point(145, 69);
+            this.TxbUserLastName.Name = "TxbUserLastName";
+            this.TxbUserLastName.Size = new System.Drawing.Size(137, 20);
+            this.TxbUserLastName.TabIndex = 8;
             // 
             // BtnAddUser
             // 
@@ -113,10 +113,10 @@
             this.UsersGridView.Name = "UsersGridView";
             this.UsersGridView.ReadOnly = true;
             this.UsersGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.UsersGridView.Size = new System.Drawing.Size(554, 248);
+            this.UsersGridView.Size = new System.Drawing.Size(547, 248);
             this.UsersGridView.TabIndex = 12;
             this.UsersGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UsersGridView_CellClick);
-          
+    
             // 
             // LblAddUser
             // 
@@ -173,12 +173,12 @@
             this.BtnAddGroup.UseVisualStyleBackColor = true;
             this.BtnAddGroup.Click += new System.EventHandler(this.BtnAddGroup_Click);
             // 
-            // Group
+            // TxbGroup
             // 
-            this.Group.Location = new System.Drawing.Point(346, 37);
-            this.Group.Name = "Group";
-            this.Group.Size = new System.Drawing.Size(105, 20);
-            this.Group.TabIndex = 23;
+            this.TxbGroup.Location = new System.Drawing.Point(346, 37);
+            this.TxbGroup.Name = "TxbGroup";
+            this.TxbGroup.Size = new System.Drawing.Size(105, 20);
+            this.TxbGroup.TabIndex = 23;
             // 
             // LblAddGRoup
             // 
@@ -202,10 +202,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(554, 514);
+            this.ClientSize = new System.Drawing.Size(547, 514);
             this.Controls.Add(this.lblGroup);
             this.Controls.Add(this.LblAddGRoup);
-            this.Controls.Add(this.Group);
+            this.Controls.Add(this.TxbGroup);
             this.Controls.Add(this.BtnAddGroup);
             this.Controls.Add(this.ComboGroupsList);
             this.Controls.Add(this.BtnUpdateUser);
@@ -214,8 +214,8 @@
             this.Controls.Add(this.LblAddUser);
             this.Controls.Add(this.UsersGridView);
             this.Controls.Add(this.BtnAddUser);
-            this.Controls.Add(this.UserLastName);
-            this.Controls.Add(this.UserName);
+            this.Controls.Add(this.TxbUserLastName);
+            this.Controls.Add(this.TxbUserName);
             this.Controls.Add(this.LblResult);
             this.Controls.Add(this.Number2);
             this.Controls.Add(this.Number1);
@@ -231,8 +231,8 @@
 
         private System.Windows.Forms.Label Number1;
         private System.Windows.Forms.Label Number2;
-        private System.Windows.Forms.TextBox UserName;
-        private System.Windows.Forms.TextBox UserLastName;
+        private System.Windows.Forms.TextBox TxbUserName;
+        private System.Windows.Forms.TextBox TxbUserLastName;
         private System.Windows.Forms.Button BtnAddUser;
         private System.Windows.Forms.Label LblResult;
         private System.Windows.Forms.DataGridView UsersGridView;
@@ -245,7 +245,7 @@
        
         
         private System.Windows.Forms.Button BtnAddGroup;
-        private System.Windows.Forms.TextBox Group;
+        private System.Windows.Forms.TextBox TxbGroup;
         private System.Windows.Forms.Label LblAddGRoup;
         private System.Windows.Forms.Label lblGroup;
     }
