@@ -39,7 +39,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.DtBirthdate = new System.Windows.Forms.DateTimePicker();
             this.BtnUpdateUser = new System.Windows.Forms.Button();
-            this.GroupsList = new System.Windows.Forms.ComboBox();
+            this.ComboGroupsList = new System.Windows.Forms.ComboBox();
             this.BtnAddGroup = new System.Windows.Forms.Button();
             this.Group = new System.Windows.Forms.TextBox();
             this.LblAddGRoup = new System.Windows.Forms.Label();
@@ -105,6 +105,7 @@
             this.UsersGridView.AllowUserToResizeColumns = false;
             this.UsersGridView.AllowUserToResizeRows = false;
             this.UsersGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
+            this.UsersGridView.BackgroundColor = System.Drawing.Color.DarkSlateGray;
             this.UsersGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.UsersGridView.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.UsersGridView.Location = new System.Drawing.Point(0, 266);
@@ -112,9 +113,10 @@
             this.UsersGridView.Name = "UsersGridView";
             this.UsersGridView.ReadOnly = true;
             this.UsersGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.UsersGridView.Size = new System.Drawing.Size(602, 248);
+            this.UsersGridView.Size = new System.Drawing.Size(554, 248);
             this.UsersGridView.TabIndex = 12;
             this.UsersGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UsersGridView_CellClick);
+          
             // 
             // LblAddUser
             // 
@@ -152,14 +154,14 @@
             this.BtnUpdateUser.UseVisualStyleBackColor = true;
             this.BtnUpdateUser.Click += new System.EventHandler(this.BtnUpdateUser_Click);
             // 
-            // GroupsList
+            // ComboGroupsList
             // 
-            this.GroupsList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.GroupsList.FormattingEnabled = true;
-            this.GroupsList.Location = new System.Drawing.Point(145, 145);
-            this.GroupsList.Name = "GroupsList";
-            this.GroupsList.Size = new System.Drawing.Size(137, 21);
-            this.GroupsList.TabIndex = 18;
+            this.ComboGroupsList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboGroupsList.FormattingEnabled = true;
+            this.ComboGroupsList.Location = new System.Drawing.Point(145, 145);
+            this.ComboGroupsList.Name = "ComboGroupsList";
+            this.ComboGroupsList.Size = new System.Drawing.Size(137, 21);
+            this.ComboGroupsList.TabIndex = 18;
             // 
             // BtnAddGroup
             // 
@@ -200,12 +202,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(602, 514);
+            this.ClientSize = new System.Drawing.Size(554, 514);
             this.Controls.Add(this.lblGroup);
             this.Controls.Add(this.LblAddGRoup);
             this.Controls.Add(this.Group);
             this.Controls.Add(this.BtnAddGroup);
-            this.Controls.Add(this.GroupsList);
+            this.Controls.Add(this.ComboGroupsList);
             this.Controls.Add(this.BtnUpdateUser);
             this.Controls.Add(this.DtBirthdate);
             this.Controls.Add(this.label2);
@@ -238,7 +240,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker DtBirthdate;
         private System.Windows.Forms.Button BtnUpdateUser;
-        private System.Windows.Forms.ComboBox GroupsList;
+        private System.Windows.Forms.ComboBox ComboGroupsList;
       
        
         
